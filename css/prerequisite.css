@@ -1,0 +1,281 @@
+
+        body, html {
+            margin-top: 45px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+        
+        h3 {
+            text-align: center;
+            background-color: #17416A;
+            padding: 5px; 
+            border-radius: 3px; 
+            color: white;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .go-back-button {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .subject-info,
+        .elective-select {
+            margin-bottom: 20px;
+        }
+
+        .subject-info label,
+        .elective-select label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .subject-info input,
+        .elective-select input,
+        .elective-select select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+
+        .elective-select {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .elective-select label {
+            margin-right: 10px;
+            width: 80px;
+        }
+
+        .elective-select input,
+        .elective-select select {
+            flex: 1;
+        }
+
+        .buttons {
+            margin-bottom: 20px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .add-button {
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #28a745; /* Keep the original green color */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            width: 100px; /* Adjust the width to match the refresh button */
+            margin-top: 10px; /* Add some space from the previous input fields */
+        }
+
+        .cancel-button {
+            background-color: #dc3545;
+        }
+
+        .elective-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .elective-table th,
+        .elective-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .elective-table th {
+            background-color: #17416A;
+            color: #fff;
+        }
+
+        .elective-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .elective-table td.delete-cell {
+            text-align: center; /* Center content in this specific cell */
+        }
+
+        .delete-button {
+            color: Black;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            background-image: url('delete.png');
+            background-repeat: no-repeat;
+            background-size: 20px 20px; /* Adjust size to fit your design */
+            background-position: 10px center; /* Positioning icon inside button */
+            text-indent: 30px; /* Space for text */
+            font-size: 0.9rem;
+        }
+        .filter-form {
+            display: flex;
+            align-items: center;
+        }
+        .refresh-button {
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #17416A;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            text-align: center;
+            width: 100px; 
+            margin-right: 10px;
+        }
+
+        /* Style for the subject code filter input */
+        #subjectCodeFilter {
+            width: 200px; /* Adjust the width for a larger dropdown */
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #f9f9f9;
+            margin-left: 10px;
+        }
+       /* Style for the pre-requisite row */
+        .preReq-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            width: 710px;
+            margin-top: 20px;
+        }
+        /* Style for the input field */
+        .preReq-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #f9f9f9;
+            margin-left: 10px;
+             
+        }
+
+        /* Optional: Adjust the placeholder text styling if needed */
+        .preReq-input::placeholder {
+            color: #888; /* Softer color for placeholder text */
+            font-size: 0.9rem; /* Adjust font size if needed */
+        }
+        /* Style for the pre-requisite year level dropdown */
+        #yearLevel {
+            width: 35%; /* Make the dropdown take full width */
+            padding: 8px; /* Add padding for a comfortable touch area */
+            border: 1px solid #ddd; /* Light border for a clean look */
+            border-radius: 4px; /* Slightly rounded corners */
+            background-color: #f9f9f9; /* Soft background color */
+            font-size: 14px; /* Adjust font size for readability */
+            color: #333; /* Text color */
+            margin-top: 10px; /* Space above the dropdown */
+            margin-bottom: 10px;
+        }
+
+        #yearLevel option {
+            padding: 10px; /* Padding inside options for better visibility */
+            background-color: #fff; /* Background for dropdown options */
+            color: #000; /* Text color */
+        }
+        #preReqDropdown {
+            width: 53%; /* Full width */
+            padding: 8px; /* Comfortable padding */
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 4px; /* Rounded corners */
+            background-color: #f9f9f9; /* Soft background */
+            font-size: 14px; /* Readable font size */
+            color: #333; /* Text color */
+            margin-top: 10px; /* Spacing above */
+            margin-bottom: 10px;
+        }
+
+        #preReqDropdown option {
+            padding: 10px; /* Option padding */
+            background-color: #fff; /* Option background */
+            color: #000; /* Option text color */
+        }
+        /* Style for the checkbox */
+        .checkbox-row {
+            display: flex;
+            align-items: center; /* Align checkbox and label vertically */
+            margin-top: 10px; /* Space above the checkbox */
+            margin-bottom: 10px;
+        }
+
+        .checkbox-row input[type="checkbox"] {
+            margin-right: 10px; /* Space between checkbox and label */
+            width: 20px; /* Adjust size as needed */
+            height: 20px; /* Adjust size as needed */
+        }
+
+        /* Style for the checkbox label */
+        .checkbox-row label {
+            font-size: 14px; /* Font size for the label */
+            color: #333; /* Text color */
+        }
+        /* Breadcrumb styling */
+        .breadcrumbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            font-size: 14px;
+            color: #6c757d;
+            padding: 12px 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            z-index: 1000;
+            border-radius: 7px;
+            font-family: Arial, sans-serif;
+            gap: 15px;
+        }
+        .breadcrumbs a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #174069;
+            font-weight: bold;
+            transition: color 0.2s ease-in-out;
+        }
+        .breadcrumbs a:hover {
+            color: #0056b3;
+        }
+        .breadcrumbs span {
+            color: #6c757d;
+        }
+        .breadcrumbs .current-page {
+            color: #FFA500;; /* Mustard yellow color */
+            font-weight: bold;
+        }
+
