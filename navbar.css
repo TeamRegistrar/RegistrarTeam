@@ -1,0 +1,678 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+
+@font-face {
+    font-family: 'myFont';
+    src: url(fonts/MonteCarlo-Regular.ttf);
+}
+.neu-university{
+
+    font-family: myFont;
+    letter-spacing: 5px;
+    font-size: x-large;
+}
+:root {
+    --white-color: #fff;
+    --blue-color: #174069;
+    --hover-color: #20568B;
+    --background-color: white;
+    --grey-color: #707070;
+    --grey-color-light: #aaa;
+    --font-size-main-menu: 14px;
+    /* Primary Menu */
+    --font-size-submenu: 14px;
+    /* Secondary Menu */
+    --font-size-tertiary-menu: 14px;
+    /* Tertiary Menu */
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    background-image: url('/rescmreg/images/NEU cover.png');
+    background-position: -80px -80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    z-index: 1003;
+    box-shadow: 0 0 2px #ccc;
+}
+
+/* Hamburger Icon Styling */
+.hamburger-icon {
+    padding: 4px;
+    /* 4px padding */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+    /* Make sure it's visible on the navbar */
+}
+
+.hamburger-icon:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    color: var(--blue-color);
+}
+
+.logo_item {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.navbar img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.navbar_content {
+    display: flex;
+    align-items: center;
+    column-gap: 25px;
+}
+
+.navbar_content i {
+    cursor: pointer;
+    font-size: 20px;
+    color: #fff;
+}
+
+/* Sidebar Header Container */
+.sidebar-header-container {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 270px;
+    background-color: var(--white-color);
+    box-shadow: 0 0 1px var(--grey-color-light);
+    z-index: 1001;
+    transition: all 0.3s ease;
+}
+
+.sidebar-header-container.collapsed {
+    width: 80px;
+}
+
+/* Sidebar header (collapse button only) */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    height: 60px;
+    position: relative;
+    border-bottom: 1px solid #ddd;
+    
+}
+
+.sidebar-collapse-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+/* Collapse toggle when sidebar is collapsed */
+.sidebar-header-container.collapsed .sidebar-collapse-toggle {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sticky-footer-container.collapsed {
+    width: 80px;
+}
+
+/* Sidebar Links */
+.nav_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Main Menu Links */
+.nav_list li {
+    margin-bottom: 15px;
+}
+
+/* Main Menu Items (Primary) */
+.nav_list a {
+    color: black;
+    text-decoration: none;
+    font-size: var(--font-size-main-menu);
+    font-weight: 500;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+
+.nav_list a span {
+    margin-left: 10px;
+    flex: 1;
+    transition: opacity 0.3s ease;
+}
+
+.nav_list a i:first-child {
+    font-size: 22px;
+    margin-right: 10px;
+}
+
+.nav_list a:hover {
+    background-color: #174069;
+    color: white;
+}
+
+/* Submenus */
+.submenu {
+    list-style: none;
+    padding-left: 40px;
+    display: none;
+}
+
+/* Submenu Items (Secondary) */
+.submenu li a {
+    font-size: var(--font-size-submenu);
+    padding: 8px 15px;
+    color: black;
+}
+
+.submenu li a:hover {
+    background-color: #174069;
+    color: white;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.profile-info strong {
+    display: block;
+    font-size: 14px;
+    color: #174069;
+}
+
+.profile-info small {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.logout-section {
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.logout-section i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #20568B;
+}
+
+.logout-section span {
+    font-size: 16px;
+    color: #174069;
+}
+
+.sidebar-header img {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+.sidebar-header h2 {
+    font-size: 16px;
+    color: #174069;
+}
+
+.sidebar-header h3 {
+    font-size: 14px;
+    color: #20568B;
+}
+
+/* Tertiary Menu (Nested Submenu) */
+.submenu .submenu li a {
+    font-size: var(--font-size-tertiary-menu);
+    padding: 7px 15px;
+    color: black;
+}
+
+/* Tertiary Menu Hover */
+.submenu .submenu li a:hover {
+    background-color: #174069;
+    color: white;
+}
+
+.submenu.open {
+    display: block;
+}
+
+.rotate-down {
+    transform: rotate(90deg);
+}
+
+.nav_list a:hover i:first-child {
+    color: white;
+}
+
+/* Sidebar text visibility during collapse */
+.sidebar.collapsed .nav_list a span {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar.collapsed .submenu {
+    display: none;
+}
+
+/* Tooltip */
+.sidebar.collapsed .nav_list a::after {
+    content: attr(data-title);
+    position: fixed;
+    left: 90px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, left 0.3s ease;
+    z-index: 1002;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    visibility: hidden;
+}
+
+/* Show tooltip on hover with delay */
+.sidebar.collapsed .nav_list a:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0.2s;
+}
+
+/* Tooltip arrow */
+.sidebar.collapsed .nav_list a::before {
+    content: '';
+    position: fixed;
+    left: 80px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent rgba(0, 0, 0, 0.75) transparent transparent;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    visibility: hidden;
+}
+
+/* Show tooltip arrow on hover with delay */
+.sidebar.collapsed .nav_list a:hover::before {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0.2s;
+}
+
+/* Mobile Navigation Menu */
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    /* Start the mobile nav off the screen to the left */
+    width: 280px;
+    height: 100vh;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1003;
+    /* Ensure mobile nav is above the overlay */
+    transition: left 0.3s ease;
+    /* Smooth sliding transition */
+    transition-delay: 0s;
+    /* No delay when opening */
+    overflow-y: auto;
+}
+
+.mobile-nav.open {
+    left: 0;
+    /* Mobile nav slides in from left to right */
+}
+
+/* Dark overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 280px;
+    /* Start at the right edge of the mobile nav */
+    width: 0;
+    /* Initially no overlay visible */
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    /* Ensure overlay stays below the mobile nav */
+    transition: width 0.3s ease;
+    /* Smooth width transition */
+    transition-delay: 0s;
+    /* Delay will be dynamically applied */
+    display: block;
+}
+
+/* Overlay when the mobile nav is open */
+.overlay.show {
+    width: calc(100vw - 280px);
+    /* Expand overlay to cover the rest of the screen */
+    transition-delay: 0.3s;
+    /* Overlay appears after the nav slides in */
+}
+
+.mobile-nav.closing {
+    left: -280px;
+    /* Mobile nav slides back out */
+    transition-delay: 0s;
+    /* Reduced delay for closing */
+}
+
+/* Overlay shrinks first */
+.overlay.hiding {
+    width: 0;
+    /* Overlay shrinks back */
+    transition-delay: 0s;
+    /* No delay for shrinking */
+}
+
+/* Prevent scrolling when mobile nav is open */
+.no-scroll {
+    overflow: hidden;
+    /* This will prevent scrolling on the body */
+}
+
+/* Close Button */
+.close-btn {
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    display: block;
+    margin-bottom: 10px;
+    color: var(--blue-color);
+}
+
+/* Main Content */
+.main-content {
+    margin-top: 80px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+    margin-left: 270px;
+}
+
+.main-content.shifted-collapsed {
+    margin-left: 80px;
+}
+
+.notification-icon {
+    font-size: 24px;
+    color: #174069;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.notification-icon:hover {
+    color: #20568B;
+}
+
+/* Sticky Footer and Profile Section */
+.sticky-footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 270px;
+    background-color: var(--white-color);
+    padding: 15px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    transition: all 0.3s ease;
+}
+
+/* Sticky Footer - Adjusted for Collapsed State */
+.sticky-footer-container.collapsed .profile-info strong,
+.sticky-footer-container.collapsed .profile-info small,
+.sticky-footer-container.collapsed .logout-section span {
+    display: none;
+    /* Hide text when sidebar is collapsed */
+}
+
+/* Ensure fixed height and width to prevent shifting */
+.sticky-footer-container.collapsed .profile-img {
+    width: 40px;
+    /* Set fixed width */
+    height: 40px;
+    /* Set fixed height */
+    line-height: 40px;
+    /* Ensure content stays vertically centered */
+    margin-bottom: 10px;
+    /* Space between profile image and notification icon */
+    margin-right: 0px;
+    /* Remove right margin to center align */
+    display: flex;
+    align-items: center;
+    /* Vertical center */
+    justify-content: center;
+    /* Horizontal center */
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* No border-radius change during hover */
+    /* Keep consistent border-radius */
+}
+
+.sticky-footer-container.collapsed .notification-icon,
+.sticky-footer-container.collapsed .logout-section i {
+    width: 40px;
+    /* Set fixed width */
+    height: 40px;
+    /* Set fixed height */
+    line-height: 40px;
+    /* Ensure content stays vertically centered */
+    margin-bottom: 10px;
+    /* Space between profile image and notification icon */
+    margin-right: 0px;
+    /* Remove right margin to center align */
+    display: flex;
+    align-items: center;
+    /* Vertical center */
+    justify-content: center;
+    /* Horizontal center */
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* No border-radius change during hover */
+    border-radius: 5px;
+    /* Keep consistent border-radius */
+}
+
+/* Hover effect for profile, notification, and logout icons in collapsed state */
+
+.sticky-footer-container.collapsed .profile-img:hover {
+    color: white;
+    /* White font */
+    width: 40px;
+    /* Keep width fixed */
+    height: 40px;
+    /* Keep height fixed */
+    cursor: pointer;
+    transform: scale(1.1);
+    /* Slightly increase size on hover */
+}
+
+.sticky-footer-container.collapsed .notification-icon:hover,
+.sticky-footer-container.collapsed .logout-section i:hover {
+    background-color: var(--blue-color);
+    /* Blue background */
+    color: white;
+    /* White font */
+    border-radius: 5px;
+    /* Slightly round corners */
+    width: 40px;
+    /* Keep width fixed */
+    height: 40px;
+    /* Keep height fixed */
+    cursor: pointer;
+    transform: scale(1.1);
+    /* Slightly increase size on hover */
+}
+
+/* Align profile and bell icons at the center when sidebar is collapsed */
+.sticky-footer-container.collapsed .profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+
+.sticky-footer-container.collapsed .profile-img {
+    margin-bottom: 25px;
+    margin-right: 0px;
+    /* Space between profile image and bell icon */
+    display: block;
+    text-align: center;
+}
+
+.sticky-footer-container.collapsed .notification-icon {
+    margin-top: 0;
+    margin-left: 0px;
+    font-size: 24px;
+    /* Adjust size of bell icon if needed */
+    display: block;
+    text-align: center;
+}
+
+/* Center the logout icon */
+.sticky-footer-container.collapsed .logout-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 80px;
+    /* Ensuring enough space */
+}
+
+/* Tooltip */
+.sidebar.collapsed .nav_list a::after {
+    content: attr(data-title);
+    position: fixed;
+    left: 90px;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, left 0.3s ease;
+    z-index: 1002;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    visibility: hidden;
+}
+
+/* Show tooltip on hover with delay */
+.sidebar.collapsed .nav_list a:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0.2s;
+}
+
+/* Tooltip arrow */
+.sidebar.collapsed .nav_list a::before {
+    content: '';
+    position: fixed;
+    left: 80px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent rgba(0, 0, 0, 0.75) transparent transparent;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    visibility: hidden;
+}
+
+/* Show tooltip arrow on hover with delay */
+.sidebar.collapsed .nav_list a:hover::before {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition-delay: 0.2s;
+}
+
+
+/* Media query for smaller screens */
+@media (max-width: 932px) {
+
+    .sidebar,
+    .sticky-footer-container,
+    .sidebar-header-container {
+        display: none;
+    }
+
+    /* Show hamburger icon on small screens */
+    .hamburger-icon {
+        display: flex;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1002;
+    }
+
+
+    /* Main content takes up full width */
+    .main-content {
+        margin-top: 80px; /* Push content below the navbar */
+        padding: 20px; /* Add padding for content */
+    }
+
+    /* Dark overlay for mobile nav */
+    .overlay.show {
+        display: block;
+    } 
+    
+
+}
