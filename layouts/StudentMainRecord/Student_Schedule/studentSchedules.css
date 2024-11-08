@@ -1,0 +1,176 @@
+/* General Styling */
+body, html {
+    font-family: Arial, sans-serif;
+    margin-top: 40px;
+    margin-bottom: 55px;
+    height: 100%;
+}
+
+/* Breadcrumb styling */
+.breadcrumbs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+    color: #6c757d;
+    padding: 12px 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    z-index: 1000;
+    border-radius: 7px;
+    font-family: Arial, sans-serif;
+    gap: 15px;
+}
+.breadcrumbs a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #174069;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+.breadcrumbs a:hover {
+    color: #0056b3;
+}
+.breadcrumbs span {
+    color: #6c757d;
+}
+.breadcrumbs .current-page {
+    color: #FFA500; /* Mustard yellow color */
+    font-weight: bold;
+}
+/* Add some top padding to the container to avoid overlap with the fixed breadcrumbs */
+.container {
+    padding-top: 50px;
+}
+
+/* Header Section */
+.header {
+    background-color: #174069;
+    color: white;
+    height: 49px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px; /* Adjusted font size to fit within 49px height */
+    line-height: 49px;
+}
+
+/* Container for main content */
+.content {
+    margin: 0 auto;
+    max-width: 1200px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Flexbox layout for input sections */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Style for labels */
+.flex-container label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Style for inputs and select */
+.flex-container input[type="text"], 
+.flex-container select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 180px;
+}
+
+/* Style for the search button */
+.flex-container button {
+    background-color: #174069;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Hover effect for the button */
+.flex-container button:hover {
+    background-color: #174069;
+}
+
+/* Divider line between sections */
+hr {
+    margin: 20px 0;
+    border: 1px solid #eaeaea;
+}
+
+/* Student information section */
+.student-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Print icon styling */
+.print-icon {
+    background-color: #174069;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Style for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+/* Style for table headers */
+th {
+    background-color: #174069;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Style for table rows */
+td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .flex-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .student-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .student-info .print-icon {
+        margin-top: 10px;
+    }
+}

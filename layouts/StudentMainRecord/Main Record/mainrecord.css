@@ -1,0 +1,103 @@
+/* General form layout */
+body {
+    font-family: Arial, sans-serif;
+    margin-top: 55px;
+    margin-bottom: 55px;
+}
+
+.container {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-color: #174069;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+/* Breadcrumb styling */
+.breadcrumbs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+    color: #6c757d;
+    padding: 12px 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    z-index: 1000;
+    border-radius: 7px;
+    font-family: Arial, sans-serif;
+    gap: 15px;
+}
+.breadcrumbs a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #174069;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+.breadcrumbs a:hover {
+    color: #0056b3;
+}
+.breadcrumbs span {
+    color: #6c757d;
+}
+.breadcrumbs .current-page {
+    color: #FFA500;; /* Mustard yellow color */
+    font-weight: bold;
+}
+/* Add some top padding to the container to avoid overlap with the fixed breadcrumbs */
+.container {
+    padding-top: 50px;
+}
+
+.section-title {
+    background-color: #174069;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.sub-section-title {
+    color: #174069;
+    font-weight: bold; 
+}
+
+/* Personal Information Styles */
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.col-md-2, .col-md-3 {
+    flex: 0 0 19%;
+    max-width: 19%;
+}
+
+.col-md-3 {
+    flex: 0 0 30%;
+    max-width: 30%;
+}
+
+p {
+    font-size: 14px;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+strong {
+    color: black;
+}
+

@@ -1,0 +1,198 @@
+/* General Styles */
+body, html {
+    font-family: Arial, sans-serif;
+    margin-top: 40px;
+    margin-bottom: 55px;
+    height: 100%;
+}
+/* Breadcrumb styling */
+.breadcrumbs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+    color: #6c757d;
+    padding: 12px 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    z-index: 1000;
+    border-radius: 7px;
+    font-family: Arial, sans-serif;
+    gap: 15px;
+}
+.breadcrumbs a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #174069;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+.breadcrumbs a:hover {
+    color: #0056b3;
+}
+.breadcrumbs span {
+    color: #6c757d;
+}
+.breadcrumbs .current-page {
+    color: #FFA500; /* Mustard yellow color */
+    font-weight: bold;
+}
+/* Add some top padding to the container to avoid overlap with the fixed breadcrumbs */
+.container {
+    padding-top: 50px;
+}
+/* Header Section */
+.header {
+    background-color: #174069;
+    color: white;
+    height: 49px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px; /* Adjusted font size to fit within 49px height */
+    line-height: 49px;
+}
+
+/* Main Content */
+.content {
+    margin: 0 auto;
+    max-width: 1200px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Search Section */
+.search-section {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.search-section .flex-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-section input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 250px;
+    margin-right: 10px;
+}
+
+.search-section button {
+    background-color: #174069;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-section button:hover {
+    background-color: #174069;
+}
+
+/* Student Information Section */
+.student-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.student-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.total-course {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+/* Options Section */
+.options {
+    margin-top: 20px;
+}
+
+.flex-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.flex-options label {
+    margin-right: 20px;
+}
+
+.flex-options span {
+    margin-left: auto;
+}
+
+/* Print Icon */
+.print-icon {
+    background-color: #174069;
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #174069;
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .search-section, .student-info, .flex-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .total-course {
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-top: 10px;
+    }
+
+    .print-icon {
+        margin-top: 10px;
+    }
+    
+}

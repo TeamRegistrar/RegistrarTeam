@@ -1,0 +1,197 @@
+body {
+    margin-left: 50px;
+    margin-right: 50px;
+    font-family: Arial, sans-serif;
+    margin-top: 55px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Breadcrumb styling */
+.breadcrumbs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+    color: #6c757d;
+    padding: 12px 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    z-index: 1000;
+    border-radius: 7px;
+    font-family: Arial, sans-serif;
+    gap: 15px;
+}
+.breadcrumbs a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #174069;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+.breadcrumbs a:hover {
+    color: #0056b3;
+}
+.breadcrumbs span {
+    color: #6c757d;
+}
+.breadcrumbs .current-page {
+    color: #FFA500; /* Mustard yellow color */
+    font-weight: bold;
+}
+/* Add some top padding to the container to avoid overlap with the fixed breadcrumbs */
+.container {
+    padding-top: 50px;
+}
+
+.header {
+    background-color: #002855;
+    color: white;
+    height: 49px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px; /* Adjusted font size to fit within 49px height */
+    line-height: 49px;
+}
+
+.search-filter-section {
+    display: flex;
+    justify-content: space-between; /* Space between for left and right alignment */
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.search-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between search input and button */
+}
+
+.search-input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    width: 300px; /* Fixed width for the search bar */
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.search-button {
+    background-color: #002855;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #0056a3;
+}
+
+.filter-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.filter-button {
+    background-color: #002855;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+    background-color: #0056a3;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 5px;
+}
+
+.filter-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    padding: 10px 20px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.dropdown-content a:hover {
+    background-color: #f0f0f0;
+}
+
+.edit-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.edit-history-table th, .edit-history-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.edit-history-table th {
+    background-color: #002855;
+    color: white;
+}
+
+.edit-history-table .empty-row {
+    text-align: center;
+    color: #999;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+.back-button {
+    background-color: #002855;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056a3;
+}

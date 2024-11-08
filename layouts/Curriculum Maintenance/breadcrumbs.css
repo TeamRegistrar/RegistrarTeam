@@ -1,0 +1,138 @@
+/* styles.css */
+
+/* Breadcrumb and section styles */
+.breadcrumb-nav {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.breadcrumb {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.breadcrumb li {
+    margin-right: 10px;
+}
+
+.breadcrumb li a {
+    color: #174069;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb li a:hover {
+    color: #20568B;
+}
+
+.breadcrumb li.active {
+    color: orange;
+    pointer-events: none;
+}
+
+.breadcrumb li::after {
+    content: ">";
+    margin-left: 10px;
+    color: #174069;
+}
+
+.breadcrumb li:last-child::after {
+    content: "";
+}
+
+/* Section header */
+.section-header {
+    background-color: #174069;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section-header h1 {
+    color: white;
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Pagination circles */
+.circle {
+    width: 14px;
+    height: 14px;
+    background-color: #D3D3D3;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.circle:hover {
+    transform: scale(1.1);
+    background-color: #174069;
+}
+
+.circle.active {
+    background-color: #174069;
+}
+
+@media (max-width: 932px) {
+    .pagination-container {
+        display: none;
+    }
+
+    
+     /* Print TOR */
+    @media print {
+
+        /* Hide the Student ID Input Section */
+        #studentId,
+        #studentId+button,
+        label[for="studentId"] {
+            display: none;
+        }
+
+        /* You can also hide any other non-printable sections like buttons */
+        .no-print,
+        button,
+        a {
+            display: none !important;
+        }
+
+        /* Ensure full table width and avoid cutting columns */
+        table {
+            width: 100% !important;
+            table-layout: fixed !important;
+            /* Prevent column cutting */
+            border-collapse: collapse !important;
+        }
+
+        th,
+        td {
+            padding: 10px !important;
+            font-size: 12px !important;
+            border: 1px solid black !important;
+            /* Ensure borders are printed */
+            word-wrap: break-word !important;
+            /* Ensure long content breaks correctly */
+        }
+
+        /* Prevent cutting between pages */
+        tr {
+            page-break-inside: avoid !important;
+            page-break-after: auto !important;
+        }
+
+        /* Ensure table headers repeat on every page */
+        thead {
+            display: table-header-group !important;
+        }
+
+        /* Print-specific margins */
+        @page {
+            size: auto;
+            margin: 10mm;
+        }
+    }
+
+}

@@ -1,0 +1,140 @@
+/* styles.css */
+
+/* Breadcrumb and section styles */
+.breadcrumb-nav {
+    margin: 0;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+        /* Breadcrumb styling */
+        .breadcrumbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            font-size: 14px;
+            color: #6c757d;
+            padding: 12px 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            z-index: 1000;
+            border-radius: 7px;
+            font-family: Arial, sans-serif;
+            gap: 15px;
+        }
+        .breadcrumbs a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #174069;
+            font-weight: bold;
+            transition: color 0.2s ease-in-out;
+        }
+        .breadcrumbs a:hover {
+            color: #0056b3;
+        }
+        .breadcrumbs span {
+            color: #6c757d;
+        }
+        .breadcrumbs .current-page {
+            color: #FFA500; /* Mustard yellow color */
+            font-weight: bold;
+        }
+        /* Add some top padding to the container to avoid overlap with the fixed breadcrumbs */
+        .container {
+            padding-top: 50px;
+        }
+
+/* Section header */
+.section-header {
+    background-color: #174069;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section-header h1 {
+    color: white;
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Pagination circles */
+.circle {
+    width: 14px;
+    height: 14px;
+    background-color: #D3D3D3;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.circle:hover {
+    transform: scale(1.1);
+    background-color: #174069;
+}
+
+.circle.active {
+    background-color: #174069;
+}
+
+@media (max-width: 932px) {
+    .pagination-container {
+        display: none;
+    }
+
+    
+     /* Print TOR */
+    @media print {
+
+        /* Hide the Student ID Input Section */
+        #studentId,
+        #studentId+button,
+        label[for="studentId"] {
+            display: none;
+        }
+
+        /* You can also hide any other non-printable sections like buttons */
+        .no-print,
+        button,
+        a {
+            display: none !important;
+        }
+
+        /* Ensure full table width and avoid cutting columns */
+        table {
+            width: 100% !important;
+            table-layout: fixed !important;
+            /* Prevent column cutting */
+            border-collapse: collapse !important;
+        }
+
+        th,
+        td {
+            padding: 10px !important;
+            font-size: 12px !important;
+            border: 1px solid black !important;
+            /* Ensure borders are printed */
+            word-wrap: break-word !important;
+            /* Ensure long content breaks correctly */
+        }
+
+        /* Prevent cutting between pages */
+        tr {
+            page-break-inside: avoid !important;
+            page-break-after: auto !important;
+        }
+
+        /* Ensure table headers repeat on every page */
+        thead {
+            display: table-header-group !important;
+        }
+
+        /* Print-specific margins */
+        @page {
+            size: auto;
+            margin: 10mm;
+        }
+    }
+
+}

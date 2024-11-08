@@ -1,0 +1,267 @@
+.home {
+    position: relative;
+}
+.arrow-left-01-icon {
+    width: 22px;
+    position: relative;
+    height: 22px;
+    object-fit: contain;
+}
+.link-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+.modification-of-data {
+    position: relative;
+    font-weight: 600;
+}
+.link-item3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    color: #fe8802;
+}
+.breadcrumb {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #fff;
+    width: 1440px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16px;
+    box-sizing: border-box;
+    gap: 16px;
+    color: #012d5e;
+}
+.student-id {
+    align-self: stretch;
+    position: relative;
+}
+.enter-student-id-wrapper {
+    align-self: stretch;
+    border-radius: 10px;
+    border: 1px solid #979797;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    color: #979797;
+}
+.student-id-parent {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+}
+.proceed-wrapper {
+    align-self: stretch;
+    background-color: #012d5e;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #fff;
+}
+.frame-parent {
+    width: 454px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    gap: 10px;
+}
+.modification-of-data-v2-11-inner {
+    position: absolute;
+    top: 121px;
+    left: 80px;
+    box-shadow: 0px 10px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    background-color: #fff;
+    width: 1294px;
+    height: 258px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+.student-id-12-3457-890-parent {
+    width: 172px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 15px;
+}
+.frame-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 158px;
+}
+.printing-page-icon {
+    width: 32px;
+    position: relative;
+    height: 33.4px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.print {
+    position: relative;
+    line-height: 23px;
+    font-weight: 500;
+}
+.print-vector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+.page-edit-icon {
+    width: 36px;
+    position: relative;
+    height: 29px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.view-history-vector {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 21px;
+}
+.btn-print-view-history {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    font-size: 13px;
+}
+.info {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 147px;
+}
+.personal-data {
+    position: relative;
+    z-index: 0;
+}
+.edit-icon {
+    width: 24px;
+    position: absolute;
+    margin: 0 !important;
+    top: 8px;
+    left: 15px;
+    height: 24px;
+    overflow: hidden;
+    flex-shrink: 0;
+    z-index: 1;
+}
+.personal-data-parent {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    height: 116px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    gap: 10px;
+}
+.physical-description {
+    flex: 1;
+    position: relative;
+    z-index: 0;
+}
+.physical-description-parent {
+    flex: 1;
+    border-radius: 10px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    height: 116px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    gap: 10px;
+    text-align: center;
+}
+.frame-container {
+    width: 912px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+}
+.frame-div {
+    width: 912px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    text-align: center;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 30px;
+}
+.info-parent {
+    position: absolute;
+    top: 413px;
+    left: 80px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    background-color: #fff;
+    width: 1291px;
+    height: 474px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 80px;
+}
+.modification-of-data-v2-11 {
+    width: 100%;
+    position: relative;
+    background-color: #f3f3f3;
+    height: 1024px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 14px;
+    color: #000;
+    font-family: Poppins;
+}
+

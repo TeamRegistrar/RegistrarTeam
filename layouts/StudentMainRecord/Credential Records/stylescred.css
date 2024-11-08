@@ -1,0 +1,181 @@
+body,html {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+    margin-top: 30px;
+}
+
+.container {
+    background-color: white;
+    padding: 60px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-color: #003366;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.passed-items-container, .required-items-container {
+    border: 2px solid #003366;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.section-title {
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.required-items-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.required-items-container ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+/* Passed Items List Styling */
+#passedItemsContainer, #datePassedContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#passedItemsList, #datePassedList {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#passedItemsList li, #datePassedList li {
+    padding: 20px;
+    border-bottom: 1px solid #e6e6e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+}
+
+#passedItemsList li span, #datePassedList li span {
+    margin-left: 15px;
+}
+
+/* Button Styles */
+.btn-add, .btn-remove {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.btn-add:hover {
+    background-color: #333;
+}
+
+.btn-remove {
+    background-color: #ff0000;
+}
+
+.btn-remove:hover {
+    background-color: darkred;
+}
+
+/* Additional styles to ensure spacing consistency */
+.passed-item-text {
+    flex-grow: 1;
+    margin-right: 40px;
+}
+
+/* New container and box styles */
+.blue-background-container {
+    background-color: #336699;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    display: block;
+    min-height: 150px;
+}
+
+/* Box styling for individual boxes */
+.box-style {
+    border: 2px solid #003366;
+    background-color: #003366;
+    padding: 10px;
+    color: white;
+}
+
+/* Class for right margin */
+.mr-10 {
+    margin-right: 10px;
+}
+
+/* Text color styling */
+.text-white {
+    color: white;
+}
+/* Breadcrumb styling */
+.breadcrumbs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    font-size: 14px;
+    color: #6c757d;
+    padding: 12px 12px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    z-index: 1000;
+    border-radius: 7px;
+    font-family: Arial, sans-serif;
+    gap: 15px;
+}
+.breadcrumbs a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #174069;
+    font-weight: bold;
+    transition: color 0.2s ease-in-out;
+}
+.breadcrumbs a:hover {
+    color: #0056b3;
+}
+.breadcrumbs span {
+    color: #6c757d;
+}
+.breadcrumbs .current-page {
+    color: #FFA500; /* Mustard yellow color */
+    font-weight: bold;
+}
+/* Add some top padding to the container to avoid overlap with the fixed breadcrumbs */
+.container {
+    padding-top: 50px;
+}
+
+
+
