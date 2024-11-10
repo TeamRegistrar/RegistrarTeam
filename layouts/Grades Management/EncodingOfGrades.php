@@ -1,28 +1,78 @@
 <?php
-// Define the current page
-$current_page = 'Encoding of Grades'; // Set this to the title of the current page
-$breadcrumbs = [
-    'Dashboard' => '/rescmreg/index.php', 
-    'Encoding of Grades' => '/rescmreg/layouts/Grades Management/EncodingOfGrades.php' 
-];
+// Include database connection
+include('db_connection.php');
+
+// Initialize variables for filtering
+$term = isset($_GET['term']) ? $_GET['term'] : '';
+$start_year = isset($_GET['start_year']) ? $_GET['start_year'] : '';
+$end_year = isset($_GET['end_year']) ? $_GET['end_year'] : '';
+$grades_status = isset($_GET['grades-status']) && is_array($_GET['grades-status']) ? $_GET['grades-status'] : [];
+$faculty_name = isset($_GET['faculty_name']) ? $_GET['faculty_name'] : '';
+$college_dept_code = isset($_GET['college_dept_code']) ? $_GET['college_dept_code'] : '';
+
+// Build SQL query with filters
+$sql = "SELECT faculty_id, faculty_name AS employee_name, college_dept_code AS college, status, students_enrolled, students_with_grade, subject_code, section, start_year, end_year FROM faculty_grades_status WHERE 1=1";
+
+if (!empty($term)) {
+    $sql .= " AND term LIKE '%$term%'";
+}
+if (!empty($start_year) && !empty($end_year)) {
+    $sql .= " AND start_year BETWEEN '$start_year' AND '$end_year'";
+} else if (!empty($start_year)) {
+    $sql .= " AND start_year >= '$start_year'";
+} else if (!empty($end_year)) {
+    $sql .= " AND start_year <= '$end_year'";
+}
+if (!empty($faculty_name)) {
+    $sql .= " AND faculty_name LIKE '%$faculty_name%'";
+}
+if (!empty($college_dept_code)) {
+    $sql .= " AND college_dept_code LIKE '%$college_dept_code%'";
+}
+if (!empty($grades_status)) {
+    $status_conditions = [];
+    foreach ($grades_status as $status) {
+        switch ($status) {
+            case 'show-all-not-verified':
+                $status_conditions[] = "status = 'Not Verified'";
+                break;
+            case 'show-all-verified':
+                $status_conditions[] = "status = 'Verified'";
+                break;
+            case 'grades-encoded':
+                $status_conditions[] = "status = 'Encoded'";
+                break;
+            case 'grades-not-encoded':
+                $status_conditions[] = "status = 'Not Encoded'";
+                break;
+        }
+    }
+    if (!empty($status_conditions)) {
+        $sql .= " AND (" . implode(' OR ', $status_conditions) . ")";
+    }
+}
+
+// Execute the query
+$result = $conn->query($sql);
+if (!$result) {
+    die("Query failed: " . $conn->error . " - SQL: " . $sql);
+}
+
+$no_record_found = $result->num_rows === 0; // Check if no records were found
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grades Status Form</title>
-
-   <!-- Load Google Fonts Poppins -->
-   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-   <!-- Load Icons -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-   <!-- Load Tailwind CSS -->
-   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-   <style>
-        /* Breadcrumb styling */
-        .breadcrumbs {
+    <title>Encoding of Grades</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+         /* Breadcrumb styling */
+         .breadcrumbs {
             position: fixed;
             top: 0;
             left: 0;
@@ -61,133 +111,128 @@ $breadcrumbs = [
         }
     </style>
 </head>
-
 <body>
      <!-- Breadcrumbs -->
-     <div class="breadcrumbs">
-        <?php 
-        $breadcrumbCount = count($breadcrumbs);
-        $currentIndex = 0;
+<div class="breadcrumbs">
+    <a href="/rescmreg/index.php">Dashboard</a>
+    <span>&gt;</span>
+  
+    <span class="current-page">Encoding of Grades</span>
+</div>
+<!-- Main content -->
+<div class="main-content p-6" id="mainContent">
+<section class="form-section mb-10 p-6 bg-white shadow-md rounded-lg mt-10">
+    <div class="container mx-auto px-4 py-6">
+    <h1 class="text-3xl font-bold text-center mb-6">Encoding Of Grades</h1>
+        <form id="filterForm" method="GET" class="mb-6">
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <label for="term" class="block text-sm font-medium text-gray-700">Term</label>
+                    <select name="term" id="term" class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <option value="">Select Term</option>
+                        <option value="1st Year" <?php if ($term === '1st Year') echo 'selected'; ?>>1st Year</option>
+                        <option value="2nd Year" <?php if ($term === '2nd Year') echo 'selected'; ?>>2nd Year</option>
+                        <option value="3rd Year" <?php if ($term === '3rd Year') echo 'selected'; ?>>3rd Year</option>
+                        <option value="4th Year" <?php if ($term === '4th Year') echo 'selected'; ?>>4th Year</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="start_year" class="block text-sm font-medium text-gray-700">Start Year</label>
+                    <input type="date" name="start_year" id="start_year" class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo htmlspecialchars($start_year); ?>">
+                </div>
+                <div>
+                    <label for="end_year" class="block text-sm font-medium text-gray-700">End Year</label>
+                    <input type="date" name="end_year" id="end_year" class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo htmlspecialchars($end_year); ?>">
+                </div>
+                <div>
+                    <label for="faculty_name" class="block text-sm font-medium text-gray-700">Faculty Name</label>
+                    <input type="text" name="faculty_name" id="faculty_name" class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo htmlspecialchars($faculty_name); ?>">
+                </div>
+                <div>
+                    <label for="college_dept_code" class="block text-sm font-medium text-gray-700">College Dept Code</label>
+                    <input type="text" name="college_dept_code" id="college_dept_code" class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="<?php echo htmlspecialchars($college_dept_code); ?>">
+                </div>
+            </div>
 
-        foreach ($breadcrumbs as $title => $link): 
-            $currentIndex++;
-            if ($title === $current_page): ?>
-                <span class="current-page"><?= htmlspecialchars($title) ?></span>
+            <h2 class="text-2xl font-bold text-center mt-10">Grades Status For</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mt-10">
+                <div class="flex items-center justify-center">
+                    <input type="checkbox" name="grades-status[]" value="show-all-not-verified" <?php if (in_array('show-all-not-verified', $grades_status)) echo 'checked'; ?>>
+                    <label for="show-all-not-verified" class="ml-2 text-sm font-medium">Show All Not Verified</label>
+                </div>
+                <div class="flex items-center justify-center">
+                    <input type="checkbox" name="grades-status[]" value="show-all-verified" <?php if (in_array('show-all-verified', $grades_status)) echo 'checked'; ?>>
+                    <label for="show-all-verified" class="ml-2 text-sm font-medium">Show All Verified</label>
+                </div>
+                <div class="flex items-center justify-center">
+                    <input type="checkbox" name="grades-status[]" value="grades-encoded" <?php if (in_array('grades-encoded', $grades_status)) echo 'checked'; ?>>
+                    <label for="grades-encoded" class="ml-2 text-sm font-medium">Grades Encoded</label>
+                </div>
+                <div class="flex items-center justify-center">
+                    <input type="checkbox" name="grades-status[]" value="grades-not-encoded" <?php if (in_array('grades-not-encoded', $grades_status)) echo 'checked'; ?>>
+                    <label for="grades-not-encoded" class="ml-2 text-sm font-medium">Grades Not Encoded</label>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-6">
+                <button type="submit" class="px-6 py-2 bg-blue-500 text-white rounded-lg shadow-md">Proceed</button>
+                <a href="SetEncodingGrades.php" class="px-6 py-2 bg-blue-500 text-white rounded-lg shadow-md text-center inline-block">Set Encoding Grades</a>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <?php if (!$no_record_found): ?>
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr style="background-color: #012D5E; color: white;">
+                            <th scope="col" class="px-6 py-3 text-center">Faculty</th>
+                            <th scope="col" class="px-6 py-3 text-center">College</th>
+                            <th scope="col" class="px-6 py-3 text-center">Status</th>
+                            <th scope="col" class="px-6 py-3 text-center">Students Enrolled</th>
+                            <th scope="col" class="px-6 py-3 text-center">Students With Grade</th>
+                            <th scope="col" class="px-6 py-3 text-center">Subject Code</th>
+                            <th scope="col" class="px-6 py-3 text-center">Section</th>
+                            <th scope="col" class="px-6 py-3 text-center">Start Year</th>
+                            <th scope="col" class="px-6 py-3 text-center">End Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                <td class="px-6 py-4 text-center"><?php echo $row['faculty_id'] . '/' . $row['employee_name']; ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo $row['college']; ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo $row['status']; ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo $row['students_enrolled']; ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo $row['students_with_grade']; ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo $row['subject_code']; ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo $row['section']; ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo $row['start_year']; ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo $row['end_year']; ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
             <?php else: ?>
-                <a href="<?= $link ?>"><?= htmlspecialchars($title) ?></a>
+                <p class="text-center text-red-600">No records found for the selected filters.</p>
             <?php endif; ?>
-            <?php if ($currentIndex < $breadcrumbCount): ?>
-                <span>&gt;</span>
-            <?php endif; ?>
-        <?php endforeach; ?>
+        </div>
     </div>
-        <!-- Main content -->
-        <div class="main-content p-6" id="mainContent">
-    <section class="form-section mb-10 p-6 bg-white shadow-md rounded-lg mt-10">
-    <div class="container mx-auto p-6">
-        <h1 class="text-3xl font-bold text-center mb-6">Encoding Of Grades</h1>
+</section>
+</div>
+<script>
+      // Breadcrumb handling based on navigation
+    document.addEventListener('DOMContentLoaded', function() {
+        const breadcrumb = document.getElementById('breadcrumb');
+        const referrer = document.referrer;
 
-
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="flex flex-col items-center">
-                <label for="term" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Term</label>
-                <select id="term" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="1st Year">1st Year</option>
-                </select>
-            </div>
-        
-            <div class="flex flex-col items-center">
-                <label for="startYear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Start Year</label>
-                <input type="number" id="startYear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            </div>
-        
-            <div class="flex flex-col items-center">
-                <label for="endYear" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">End Year</label>
-                <input type="number" id="endYear" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            </div>
-        </div>
-
-
-             <!--Check box container-->
-        <h2 class="text-2xl font-bold text-center mb-4">Grades Status For</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mt-10">
-            <div class="flex items-center justify-center">
-                <input type="radio" id="show-all-not-verified" name="grades-status" value="show-all-not-verified">
-                <label for="show-all-not-verified" class="ml-2 text-sm font-medium text-gray-900 dark:text-white">Show All Not Verified</label>
-            </div>
-        
-            <div class="flex items-center justify-center">
-                <input type="radio" id="show-all-verified" name="grades-status" value="show-all-verified">
-                <label for="show-all-verified" class="ml-2 text-sm font-medium text-gray-900 dark:text-white">Show All Verified</label>
-            </div>
-        
-            <div class="flex items-center justify-center">
-                <input type="radio" id="grades-encoded" name="grades-status" value="grades-encoded">
-                <label for="grades-encoded" class="ml-2 text-sm font-medium text-gray-900 dark:text-white">Grades Encoded</label>
-            </div>
-        
-            <div class="flex items-center justify-center">
-                <input type="radio" id="grades-not-encoded" name="grades-status" value="grades-not-encoded">
-                <label for="grades-not-encoded" class="ml-2 text-sm font-medium text-gray-900 dark:text-white">Grades Not Encoded</label>
-            </div>
-        </div>
-        
-        <div class="text-center mt-20">
-            <a href="GradeStatus.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >Proceed</a>
-        </div>
-    </section>
-    
-    <section class="form-section mb-10 p-6 bg-white shadow-md rounded-lg mt-10">
-        <h2 class="text-2xl font-bold text-center mt-10 mb-4">College</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-                <label for="college" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter College</label>
-                <input type="text" id="college" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            </div>
-
-            <div>
-                <label for="employee-id-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Employee ID/Name</label>
-                <input type="text" id="employee-id-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            </div>
-        </div>
-
-        <div class="text-center mt-6">
-            <a href="GradeStatus.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >Proceed</a>
-        </div>
-
-        <div class="text-center mt-6">
-            <a href="SetEncodingGrades.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >Set Encoding Date</a>
-        </div>
-        </section>
-    </div>
-    <script>
-             document.addEventListener('DOMContentLoaded', function() {
-        // Select the breadcrumb container
-        const breadcrumbContainer = document.querySelector('.breadcrumbs');
-
-        // Add event listener to 'Update' button to add breadcrumb item
-        document.querySelector('.change-btn[data-breadcrumb]').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default link behavior
-
-            // Get the breadcrumb name from the data attribute
-            const breadcrumbName = this.getAttribute('data-breadcrumb');
-
-            // Generate the new breadcrumb item
-            const newBreadcrumb = `<a href="${this.href}">${breadcrumbName}</a>`;
-
-            // Append new breadcrumb to container with separator
-            breadcrumbContainer.innerHTML += ` &gt; ${newBreadcrumb}`;
-
-            // Redirect to the actual link after updating the breadcrumb
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 100); // Small delay to visually update breadcrumbs first
-        });
+        // Check if navigated from Course Maintenance
+        if (referrer.includes('course-maintenance.php')) {
+            // Breadcrumb already shows "Update Category"
+        } else {
+            // Adjust breadcrumb if accessed directly or from elsewhere
+            breadcrumb.innerHTML = '<a href="/rescmreg/layouts/home.php">Home</a> &gt; <span>Update Category</span>';
+        }
     });
     </script>
 </body>
-
 </html>
