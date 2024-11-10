@@ -184,6 +184,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     #student-info-section {
         display: none;
     }
+    /* Section header */
+    .section-header {
+        background-color: #174069;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .section-header h1 {
+        color: white;
+        margin: 0;
+    }
 </style>
 <script>
     //Toggle the visibility of the student info section
