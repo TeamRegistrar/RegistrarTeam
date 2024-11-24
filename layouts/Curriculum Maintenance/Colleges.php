@@ -5,6 +5,67 @@ $breadcrumbs = [
     'Dashboard' => '/rescmreg/index.php', 
     'Colleges' => '/rescmreg/layouts/Curriculum Maintenance/Colleges.php' 
 ];
+
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "curriculum_maintenance"; // Make sure this matches your database name
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Handle form submission for saving a new record
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['save'])) {
+    // Get the course details from the form
+    $course_code = $_POST['course_code'];
+    $course_name = $_POST['course_name'];
+
+    // Get the latest order number and increment it
+    $sql = "SELECT MAX(order_no) AS max_order FROM crudforcp";
+    $result = $conn->query($sql);
+    $max_order = 0; // Default value if no rows exist
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $max_order = $row['max_order'];
+    }
+    $order_no = $max_order + 1; // Increment the order number
+
+    // Insert data into the database
+    $sql = "INSERT INTO crudforcp (order_no, course_code, course_name) VALUES ('$order_no', '$course_code', '$course_name')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Set success message
+        $success_message = "New record created successfully";
+    } else {
+        $error_message = "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+
+// Handle delete request when clicking "Remove"
+if (isset($_GET['delete_order_no'])) {
+    $order_no_to_delete = $_GET['delete_order_no'];
+
+    // Delete the course program from the database
+    $delete_sql = "DELETE FROM crudforcp WHERE order_no = $order_no_to_delete";
+    
+    if ($conn->query($delete_sql) === TRUE) {
+        // Set success message (red color)
+        $success_message = "<div class='text-red-600 text-center mb-4'>Record deleted successfully</div>";
+    } else {
+        $error_message = "Error: " . $delete_sql . "<br>" . $conn->error;
+    }
+}
+
+// Retrieve data from the database
+$sql = "SELECT * FROM crudforcp";
+$result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,99 +143,89 @@ $breadcrumbs = [
         <?php endforeach; ?>
     </div>
 
-    <!-- Navbar placeholder -->
-    <div id="navbar-placeholder"></div>
-
     <!-- Main content -->
     <div class="main-content p-6" id="mainContent">
+        <!-- Form section -->
+        <section class="form-section mb-10 p-6 bg-white shadow-md rounded-lg mt-10">
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <div class="grid gap-6 mb-6 md:grid-cols-3">
+                    <div>
+                        <label for="college_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">College code</label>
+                        <input type="text" name="college_code" id="college_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Input College code" required />
+                    </div>
+
+                    <div>
+                        <label for="college_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">College name</label>
+                        <input type="text" name="college_name" id="college_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Input College name" required />
+                    </div>
+
+                    <div>
+                        <label for="dean" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Dean</label>
+                        <input type="text" name="dean" id="dean" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Input name of dean" required />
+                    </div>
+                </div>
+
+                <!-- Display error or success messages -->
+                <?php if (isset($error_message)) { ?>
+                    <div class="text-red-600 text-center mb-4"><?php echo $error_message; ?></div>
+                <?php } elseif (isset($success_message)) { ?>
+                    <div class="<?php echo $success_message_color; ?> text-center mb-4"><?php echo $success_message; ?></div>
+                <?php } ?>
+
+                <!-- Save and buttons -->
+                <section class="flex justify-between items-start mb-12 w-full">
+                    <!-- Column 1 -->
+                    <div class="flex flex-col w-full max-w-2xl px-4 mb-4">
+                        <button type="submit" name="save" class="mb-4 text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 flex items-center justify-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <i class="fa-regular fa-floppy-disk mr-2"></i> Save Entry Changes
+                        </button>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="flex flex-col w-full max-w-2xl px-4 mb-4">
+                        <button type="button" class="mb-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 flex items-center justify-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <i class="fas fa-print mr-2"></i> Print
+                        </button>
+                    </div>
+
+                    <!-- Column 3 -->
+                    <div class="flex flex-col w-full max-w-2xl px-4 mb-4">
+                        <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3 flex items-center justify-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                            <i class="fas fa-history mr-2"></i> View History
+                        </button>
+                    </div>
+                </section>
+            </form>
+        </section>
+
+        <!-- Table section -->
+        <section class="table-section p-6 bg-white shadow-md rounded-lg">
+            <h2 class="text-lg font-semibold text-gray-900 mb-6 text-center">List of Colleges</h2>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr style="background-color: #012D5E; color: white;">
+                            <th scope="col" class="px-6 py-3 text-center">College code</th>
+                            <th scope="col" class="px-6 py-3 text-center">College name</th>
+                            <th scope="col" class="px-6 py-3 text-center">College dean</th>
+                            <th scope="col" class="px-6 py-3 text-center">Edit & Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $result->fetch_assoc()) { ?>
+                            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                                <td class="px-6 py-4 text-center"><?php echo $row['college_code']; ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo $row['college_name']; ?></td>
+                                <td class="px-6 py-4 text-center"><?php echo $row['dean']; ?></td>
+                                <td class="px-6 py-4 text-center">
+
+                                <a href="edit_college.php?college_code=<?php echo $row['college_code']; ?>" class="font-medium text-blue-600 hover:text-blue-800 mr-4">Edit</a>
 
 
-          <!-- Form section -->
-
-    <section class="form-section mb-10 p-6 bg-white shadow-md rounded-lg mt-10">
-    <form>
-        <div class="grid gap-6 mb-6 md:grid-cols-3">
-            <div>
-                <label for="order_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">College code</label>
-                <input type="text" id="order_no" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Input College code" required />
-            </div>
-
-            <div>
-                <label for="course_code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">College name</label>
-                <input type="text" id="course_code" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Input College name" required />
-            </div>
-
-            <div>
-                <label for="course_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center">Dean</label>
-                <input type="text" id="course_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Input name of dean" required />
-            </div>
-        </div>
-    </form>
-</section>
-
-<!--Buttons-->
-
-<section class="flex justify-between items-start mb-12 w-full"> 
-    <div class="flex flex-col w-full max-w-2xl px-4"> <!-- First column -->
-        <button type="button" class="mb-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 flex items-center justify-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            <i class="fa-regular fa-floppy-disk mr-2"></i> <!-- Save icon -->
-            Save Entry Changes
-        </button>
-        
-        <button type="button" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-3 flex items-center justify-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800">
-            <i class="fas fa-edit mr-2"></i> <!-- Edit icon -->
-            Edit
-        </button>
-    </div>
-
-    <div class="flex flex-col w-full max-w-2xl px-4"> <!-- Second column -->
-        <button type="button" class="mb-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 flex items-center justify-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            <i class="fas fa-print mr-2"></i> <!-- Print icon -->
-            Print
-        </button>
-
-        <button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-3 flex items-center justify-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-            <i class="fas fa-history mr-2"></i> <!-- History icon -->
-            View History
-        </button>
-    </div>
-</section>
-
-
-
- <!-- Table section -->
-
-
- <section class="table-section p-6 bg-white shadow-md rounded-lg">
-    <h2 class="text-lg font-semibold text-gray-900 mb-6 text-center">List of Colleges</h2>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-             
-                <tr style="background-color: #012D5E; color: white;">
-                    <th scope="col" class="px-6 py-3 text-center">College code</th>
-                    <th scope="col" class="px-6 py-3 text-center">College name</th>
-                    <th scope="col" class="px-6 py-3 text-center">College dean</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">CBA.</th>
-                    <td class="px-6 py-4 text-center">College of business Administration</td>
-                    <td class="px-6 py-4 text-center">Name of dean Colleges</td>
-
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">CEA</th>
-                    <td class="px-6 py-4 text-center">College of Engineering Architechture</td>
-                    <td class="px-6 py-4 text-center">Name of dean Colleges</td>
-                    
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center">CICS</th>
-                    <td class="px-6 py-4 text-center">College of computing in Computer studies</td>
-                    <td class="px-6 py-4 text-center">Name of dean Colleges</td>
-                </tr>
+                                <a href="?delete_id=<?php echo $row['id']; ?>" class="font-medium text-red-600 hover:text-red-800">Remove</a>
+                                </td>
+                            </tr>
+                        <?php } ?>
             </tbody>
         </table>
     </div>
@@ -205,6 +256,7 @@ $breadcrumbs = [
     });
     </script>    
 </body>
-
 </html> 
-
+<?php
+$conn->close();
+?>
