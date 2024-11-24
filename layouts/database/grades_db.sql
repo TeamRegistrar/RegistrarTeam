@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS grades_db;
 USE grades_db;
 
--- Students Table
 CREATE TABLE IF NOT EXISTS students (
     student_id VARCHAR(10) PRIMARY KEY,
     studentName VARCHAR(100) NOT NULL,
@@ -9,7 +8,7 @@ CREATE TABLE IF NOT EXISTS students (
     studentYear INT NOT NULL
 );
 
--- Sample data for students table
+
 INSERT INTO students (student_id, studentName, program, studentYear) VALUES
 ('S001', 'John Doe', 'Computer Science', 2),
 ('S002', 'Jane Smith', 'Business Administration', 3);

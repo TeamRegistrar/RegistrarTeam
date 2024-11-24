@@ -127,7 +127,7 @@ $no_record_found = $result->num_rows === 0; // Check if no records were found
         <form id="filterForm" method="GET" class="mb-6">
             <div class="grid grid-cols-3 gap-4">
                 <div>
-                    <label for="term" class="block text-sm font-medium text-gray-700">Term</label>
+                    <label for="term" class="block text-sm font-medium text-gray-700">Year</label>
                     <select name="term" id="term" class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         <option value="">Select Term</option>
                         <option value="1st Year" <?php if ($term === '1st Year') echo 'selected'; ?>>1st Year</option>
