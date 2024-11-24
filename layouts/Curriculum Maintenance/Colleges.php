@@ -1,11 +1,4 @@
 <?php
-// Define the current page
-$current_page = 'Colleges'; // Set this to the title of the current page
-$breadcrumbs = [
-    'Dashboard' => '/rescmreg/index.php', 
-    'Colleges' => '/rescmreg/layouts/Curriculum Maintenance/Colleges.php' 
-];
-
 // Database connection
 $servername = "localhost";
 $username = "root";
@@ -22,51 +15,52 @@ if ($conn->connect_error) {
 
 // Handle form submission for saving a new record
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['save'])) {
-    // Get the course details from the form
-    $course_code = $_POST['course_code'];
-    $course_name = $_POST['course_name'];
+    // Get the college details from the form
+    $college_code = $_POST['college_code'];
+    $college_name = $_POST['college_name'];
+    $dean = $_POST['dean'];
 
-    // Get the latest order number and increment it
-    $sql = "SELECT MAX(order_no) AS max_order FROM crudforcp";
-    $result = $conn->query($sql);
-    $max_order = 0; // Default value if no rows exist
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $max_order = $row['max_order'];
-    }
-    $order_no = $max_order + 1; // Increment the order number
+    // Check if the dean already exists
+    $check_sql = "SELECT * FROM colleges WHERE dean = '$dean'";
+    $check_result = $conn->query($check_sql);
 
-    // Insert data into the database
-    $sql = "INSERT INTO crudforcp (order_no, course_code, course_name) VALUES ('$order_no', '$course_code', '$course_name')";
-
-    if ($conn->query($sql) === TRUE) {
-        // Set success message
-        $success_message = "New record created successfully";
+    if ($check_result->num_rows > 0) {
+        // Dean already exists in the table
+        $error_message = "The dean's name already exists. Please enter a unique name.";
     } else {
-        $error_message = "Error: " . $sql . "<br>" . $conn->error;
+        // Insert the new record into the database
+        $insert_sql = "INSERT INTO colleges (college_code, college_name, dean) VALUES ('$college_code', '$college_name', '$dean')";
+        
+        if ($conn->query($insert_sql) === TRUE) {
+            $success_message = "New record created successfully";
+            $success_message_color = "text-green-600";  // Set green color for creation success
+        } else {
+            $error_message = "Error: " . $insert_sql . "<br>" . $conn->error;
+        }
     }
 }
 
-
 // Handle delete request when clicking "Remove"
-if (isset($_GET['delete_order_no'])) {
-    $order_no_to_delete = $_GET['delete_order_no'];
+if (isset($_GET['delete_id'])) {
+    $id_to_delete = $_GET['delete_id'];
 
-    // Delete the course program from the database
-    $delete_sql = "DELETE FROM crudforcp WHERE order_no = $order_no_to_delete";
+    // Delete the college from the database
+    $delete_sql = "DELETE FROM colleges WHERE id = $id_to_delete";
     
     if ($conn->query($delete_sql) === TRUE) {
-        // Set success message (red color)
-        $success_message = "<div class='text-red-600 text-center mb-4'>Record deleted successfully</div>";
+        // Change success message to red for deletion success
+        $success_message = "Record deleted successfully";
+        $success_message_color = "text-red-600";  // Set red color for deletion success
     } else {
         $error_message = "Error: " . $delete_sql . "<br>" . $conn->error;
     }
 }
 
 // Retrieve data from the database
-$sql = "SELECT * FROM crudforcp";
+$sql = "SELECT * FROM colleges";
 $result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,12 +68,10 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Applicant</title>
-    <!-- Load Google Fonts Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- Load Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Load Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="/Navbar + Applicant Summary/Components/navbar.js"></script>
     <style>
         /* Breadcrumb styling */
         .breadcrumbs {
@@ -120,28 +112,16 @@ $result = $conn->query($sql);
             padding-top: 50px;
         }
     </style>
-
 </head>
 
 <body>
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-        <?php 
-        $breadcrumbCount = count($breadcrumbs);
-        $currentIndex = 0;
-
-        foreach ($breadcrumbs as $title => $link): 
-            $currentIndex++;
-            if ($title === $current_page): ?>
-                <span class="current-page"><?= htmlspecialchars($title) ?></span>
-            <?php else: ?>
-                <a href="<?= $link ?>"><?= htmlspecialchars($title) ?></a>
-            <?php endif; ?>
-            <?php if ($currentIndex < $breadcrumbCount): ?>
-                <span>&gt;</span>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </div>
+      <!-- Breadcrumbs -->
+<div class="breadcrumbs">
+    <a href="/rescmreg/index.php">Dashboard</a>
+    <span>&gt;</span>
+  
+    <span class="current-page">Colleges</span>
+</div>
 
     <!-- Main content -->
     <div class="main-content p-6" id="mainContent">
@@ -226,37 +206,15 @@ $result = $conn->query($sql);
                                 </td>
                             </tr>
                         <?php } ?>
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </div>
-</section>    
-<script>
-             document.addEventListener('DOMContentLoaded', function() {
-        // Select the breadcrumb container
-        const breadcrumbContainer = document.querySelector('.breadcrumbs');
-
-        // Add event listener to 'Update' button to add breadcrumb item
-        document.querySelector('.change-btn[data-breadcrumb]').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default link behavior
-
-            // Get the breadcrumb name from the data attribute
-            const breadcrumbName = this.getAttribute('data-breadcrumb');
-
-            // Generate the new breadcrumb item
-            const newBreadcrumb = `<a href="${this.href}">${breadcrumbName}</a>`;
-
-            // Append new breadcrumb to container with separator
-            breadcrumbContainer.innerHTML += ` &gt; ${newBreadcrumb}`;
-
-            // Redirect to the actual link after updating the breadcrumb
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 100); // Small delay to visually update breadcrumbs first
-        });
-    });
-    </script>    
+    
 </body>
-</html> 
+</html>
+
 <?php
 $conn->close();
 ?>
