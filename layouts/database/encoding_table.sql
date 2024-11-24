@@ -1,27 +1,22 @@
--- Create the database if it doesn't exist
 CREATE DATABASE IF NOT EXISTS grades_management;
-
--- Select the database
 USE grades_management;
 
--- Create the faculty_grades_status table
 CREATE TABLE faculty_grades_status (
-    record_id INT(11) AUTO_INCREMENT PRIMARY KEY,  -- New primary key column
-    faculty_id INT(6) NOT NULL,                    -- Faculty ID, not primary key
+    record_id INT(11) AUTO_INCREMENT PRIMARY KEY,  
+    faculty_id INT(6) NOT NULL,                    
     faculty_name VARCHAR(100) NOT NULL,
     college_dept_code VARCHAR(50) NOT NULL,
-    status VARCHAR(50) NOT NULL,                   -- Adjusted column size to 50
+    status VARCHAR(50) NOT NULL,                   
     students_enrolled INT NOT NULL,
     students_with_grade INT NOT NULL,
     subject_code VARCHAR(50) NOT NULL,
     section VARCHAR(10) NOT NULL,
     term VARCHAR(50) NOT NULL,
-    start_year DATE NOT NULL,                      -- Changed to DATE
-    end_year DATE NOT NULL,                        -- Changed to DATE
-    UNIQUE (faculty_id)                            -- Make faculty_id a unique key if needed
+    start_year DATE NOT NULL,                      
+    end_year DATE NOT NULL,                        
+    UNIQUE (faculty_id)                            
 );
 
--- Insert sample data into the faculty_grades_status table
 INSERT INTO faculty_grades_status 
 (faculty_id, faculty_name, college_dept_code, status, students_enrolled, students_with_grade, subject_code, section, term, start_year, end_year)
 VALUES
