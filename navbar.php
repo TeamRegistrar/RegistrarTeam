@@ -8,58 +8,58 @@ function renderMenu() {
         "Student Main Record" => [
             "icon" => "bi-file-earmark-text",
             "sub-menu" => [
-                "Main Record" => "/rescmreg/layouts/StudentMainRecord/Main Record/main-record.php",
-                "Modification of Data" => "/rescmreg/layouts/StudentMainRecord/Modification/modification.php",
-                "Academic Records from other School" => "/rescmreg/layouts/StudentMainRecord/Academic_From_Other_School/acad-records-from-other-school.php",
-                "Credential Records" => "/rescmreg/layouts/StudentMainRecord/Credential Records/credentials.php",
-                "Grade Status" => "/rescmreg/layouts/StudentMainRecord/Grade_Status/gradeStatus.php",
-                "Student Schedule" => "/rescmreg/layouts/StudentMainRecord/Student_Schedule/studentSched.php",
-                "Residency Status" => "/rescmreg/layouts/StudentMainRecord/Residency Status/residency-status.php"
+                "Main Record" => "/RegistrarTeam/layouts/StudentMainRecord/Main Record/main-record.php",
+                "Modification of Data" => "/RegistrarTeam/layouts/StudentMainRecord/Modification/modification.php",
+                "Academic Records from other School" => "/RegistrarTeam/layouts/StudentMainRecord/Academic_From_Other_School/acad-records-from-other-school.php",
+                "Credential Records" => "/RegistrarTeam/layouts/StudentMainRecord/Credential Records/credentials.php",
+                "Grade Status" => "/RegistrarTeam/layouts/StudentMainRecord/Grade_Status/gradeStatus.php",
+                "Student Schedule" => "/RegistrarTeam/layouts/StudentMainRecord/Student_Schedule/studentSched.php",
+                "Residency Status" => "/RegistrarTeam/layouts/StudentMainRecord/Residency Status/residency-status.php"
             ],
         ],
         "Course Maintenance" => [
             "icon" => "bi-journal", 
-            "link" => "/rescmreg/layouts/coursemaintenance/course-maintenance.php"
+            "link" => "/RegistrarTeam/layouts/coursemaintenance/course-maintenance.php"
         ],
         "Curriculum Maintenance" => [
             "icon" => "bi-book",  
             "sub-menu" => [
-                "Course Program" => "/rescmreg/layouts/Curriculum Maintenance/courseProgram.php",
-                "Colleges" => "/rescmreg/layouts/Curriculum Maintenance/Colleges.php",
-                "Departments With College" => "/rescmreg/layouts/Curriculum Maintenance/DepartmentWithColleges.php",
-                "Department without College" => "/rescmreg/layouts/Curriculum Maintenance/DepartmentWithoutColleges.php",
-                "Courses" => "/rescmreg/layouts/Curriculum Maintenance/Courses.php",
-                "Equivalent Subject for Advising " => "/rescmreg/layouts/Curriculum Maintenance/EquivalentSubject.php",
-                "Subject Without Credit Unit" => "/rescmreg/layouts/Curriculum Maintenance/SubjectWithoutCredit.php",
-                "Course Curriculum" => "/rescmreg/layouts/Curriculum Maintenance/CoursesCurriculum.php",
-                "List of Course Offering Subject" => "/rescmreg/layouts/Curriculum Maintenance/List-of-course-offering-subject.php",
-                "Copy/Delete Curriculum" => "/rescmreg/layouts/Curriculum Maintenance/Copy-delete.php",
+                "Course Program" => "/RegistrarTeam/layouts/Curriculum Maintenance/courseProgram.php",
+                "Colleges" => "/RegistrarTeam/layouts/Curriculum Maintenance/Colleges.php",
+                "Departments With College" => "/RegistrarTeam/layouts/Curriculum Maintenance/DepartmentWithColleges.php",
+                "Department without College" => "/RegistrarTeam/layouts/Curriculum Maintenance/DepartmentWithoutColleges.php",
+                "Courses" => "/RegistrarTeam/layouts/Curriculum Maintenance/Courses.php",
+                "Equivalent Subject for Advising " => "/RegistrarTeam/layouts/Curriculum Maintenance/EquivalentSubject.php",
+                "Subject Without Credit Unit" => "/RegistrarTeam/layouts/Curriculum Maintenance/SubjectWithoutCredit.php",
+                "Course Curriculum" => "/RegistrarTeam/layouts/Curriculum Maintenance/CoursesCurriculum.php",
+                "List of Course Offering Subject" => "/RegistrarTeam/layouts/Curriculum Maintenance/List-of-course-offering-subject.php",
+                "Copy/Delete Curriculum" => "/RegistrarTeam/layouts/Curriculum Maintenance/Copy-delete.php",
             ]
         ],
         "Grades Management" => [
             "icon" => "bi-pencil",  
             "sub-menu" => [
-                "Encoding of Grades - Status Report" => "/rescmreg/layouts/Grades Management/EncodingOfGrades.php",
-                "Final Report of Grade" => "/rescmreg/layouts/Grades Management/FinalReportOfGrades.php",
-                "Rectification of Grades" => "/rescmreg/layouts/Grades Management/RectificationofGrades.php",
-                "Completion of Grades" => "/rescmreg/layouts/Grades Management/CompletionOfGrades.php",
-                "Unlocking of Grades" => "/rescmreg/layouts/Grades Management/UnlockingOfGrades.php",
+                "Encoding of Grades - Status Report" => "/RegistrarTeam/layouts/Grades Management/EncodingOfGrades.php",
+                "Final Report of Grade" => "/RegistrarTeam/layouts/Grades Management/FinalReportOfGrades.php",
+                "Rectification of Grades" => "/RegistrarTeam/layouts/Grades Management/RectificationofGrades.php",
+                "Completion of Grades" => "/RegistrarTeam/layouts/Grades Management/CompletionOfGrades.php",
+                "Unlocking of Grades" => "/RegistrarTeam/layouts/Grades Management/UnlockingOfGrades.php",
             ]
         ],
         "Reports" => [
             "icon" => "bi-file-earmark",  
             "sub-menu" => [
-                "Official Transcript of Records" => "/rescmreg/layouts/Reports/officialTOR.php",
-                "Official Transcript of Records of Candidate for Graduation" => "/rescmreg/layouts/Reports/officialTORofCFG.php",
-                "Candidate for Graduation" => "/rescmreg/layouts/Reports/candidatesforgrad.php",
-                "Certification of Grades" => "/rescmreg/layouts/Reports/cog.php",
-                "Evaluation of Grades" => "/rescmreg/layouts/Reports/evalOfGrades.php",
+                "Official Transcript of Records" => "/RegistrarTeam/layouts/Reports/officialTOR.php",
+                "Official Transcript of Records of Candidate for Graduation" => "/RegistrarTeam/layouts/Reports/officialTORofCFG.php",
+                "Candidate for Graduation" => "/RegistrarTeam/layouts/Reports/candidatesforgrad.php",
+                "Certification of Grades" => "/RegistrarTeam/layouts/Reports/cog.php",
+                "Evaluation of Grades" => "/RegistrarTeam/layouts/Reports/evalOfGrades.php",
                 
             ]
             ],
         "Official Dropping of Subject" => [
             "icon" => "bi-journal", 
-            "link" => "/rescmreg/layouts/Official Dropping/OfficialDropping.php",
+            "link" => "/RegistrarTeam/layouts/Official Dropping/OfficialDropping.php",
         ],
     ];
 
@@ -76,7 +76,7 @@ function renderMenu() {
         }
     }
 
-    echo "<li class='profile-item'><a href='#' onclick='showProfile()'><img src='/rescmreg/images/profile.jpg' class='profile-image' alt='Profile Image'> <span class='menu-text'>Profile</span> <i class='bi bi-bell' style='float:right;'></i></a></li>";
+    echo "<li class='profile-item'><a href='#' onclick='showProfile()'><img src='/RegistrarTeam/images/profile.jpg' class='profile-image' alt='Profile Image'> <span class='menu-text'>Profile</span> <i class='bi bi-bell' style='float:right;'></i></a></li>";
     echo "<li class='logout-item' onclick='logout()'><a href='#'><i class='bi bi-box-arrow-right'></i> <span class='menu-text'>Log Out</span></a></li>";
 }
 ?>
@@ -243,7 +243,7 @@ function renderMenu() {
             <i class="bx bx-menu" onclick="toggleSidebar()"></i>
         </div>
         <div class="logo_item">
-            <img src="/rescmreg/images/NEU Logo.png" alt="NEU Logo">
+            <img src="/RegistrarTeam/images/NEU Logo.png" alt="NEU Logo">
             <span class="neu-university">NEW ERA UNIVERSITY</span> NEU SYSTEM
         </div>
     </nav>
